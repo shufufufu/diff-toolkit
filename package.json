@@ -1,0 +1,33 @@
+{
+  "name": "@crc/xml-diff-toolkit",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rslib build",
+    "dev": "rslib build --watch",
+    "test": "vitest",
+    "test:acceptance": "tsx __tests__/acceptance-runner.ts",
+    "test:watch": "vitest --watch",
+    "lint": "eslint src/"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@rslib/core": "^0.3.2",
+    "@types/node": "^20.17.30",
+    "@vitest/coverage-v8": "^2.1.4",
+    "tsx": "^4.19.4",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  },
+  "dependencies": {
+    "diff": "^7.0.0"
+  }
+} 
