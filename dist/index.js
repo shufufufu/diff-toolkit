@@ -83,13 +83,14 @@ function handleWithJsDiff(currentCode, suggestedCode, options) {
             originalLineNumber += lines.length;
         }
     }
-    return applyUniversalOptimizations(result, currentCode, suggestedCode);
+    return applySafeOptimizations(result);
 }
-function applyUniversalOptimizations(result, currentCode, suggestedCode) {
+function applySafeOptimizations(result) {
     result.equal = mergeConsecutiveEqualBlocks(result.equal);
-    result.addition = mergeAdjacentAdditions(result.addition);
-    result = fixCompleteReplacementInsertPosition(result);
-    result = convertRemoveAddToPureInsert(result, currentCode, suggestedCode);
+    if (0 === result.equal.length && result.remove.length > 0 && result.addition.length > 0) result.addition = result.addition.map((add)=>({
+            ...add,
+            insertAfterLine: 0
+        }));
     return result;
 }
 function mergeConsecutiveEqualBlocks(equalBlocks) {
@@ -110,55 +111,5 @@ function mergeConsecutiveEqualBlocks(equalBlocks) {
     }
     merged.push(current);
     return merged;
-}
-function mergeAdjacentAdditions(additions) {
-    if (additions.length <= 1) return additions;
-    const merged = [];
-    let i = 0;
-    while(i < additions.length){
-        let current = additions[i];
-        let j = i + 1;
-        while(j < additions.length && additions[j].insertAfterLine === current.insertAfterLine + 1){
-            current = {
-                insertAfterLine: current.insertAfterLine,
-                content: current.content + '\n' + additions[j].content
-            };
-            j++;
-        }
-        merged.push(current);
-        i = j;
-    }
-    return merged;
-}
-function fixCompleteReplacementInsertPosition(result) {
-    if (0 === result.equal.length && result.remove.length > 0 && result.addition.length > 0) return {
-        ...result,
-        addition: result.addition.map((add)=>({
-                ...add,
-                insertAfterLine: 0
-            }))
-    };
-    return result;
-}
-function convertRemoveAddToPureInsert(result, currentCode, suggestedCode) {
-    if (result.remove.length > 0 && result.addition.length > 0) {
-        const removedContent = result.remove.map((r)=>r.content).join('\n');
-        if (suggestedCode.includes(removedContent)) return {
-            hasDifference: true,
-            equal: [
-                {
-                    startLine: 1,
-                    endLine: currentCode.split('\n').length,
-                    content: currentCode
-                }
-            ],
-            remove: [],
-            addition: result.addition.map((add)=>({
-                    ...add,
-                    insertAfterLine: add.insertAfterLine
-                }))
-        };
-    }
-    return result;
 }
 export { diffCode };

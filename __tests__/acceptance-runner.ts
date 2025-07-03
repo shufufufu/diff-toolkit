@@ -4,6 +4,7 @@ import { performance } from 'perf_hooks';
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 import type {
+  AcceptanceTestCase,
   AcceptanceTestResult,
   AcceptanceTestReport,
   DiffResult,
