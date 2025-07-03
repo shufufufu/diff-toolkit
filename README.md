@@ -1,6 +1,6 @@
  # XML Diff Toolkit CLI 使用指南
 
-## 🚀 快速开始
+## 快速开始
 
 ### 安装和构建
 
@@ -22,7 +22,7 @@ node dist/cli.js --help
 node dist/cli.js --version
 ```
 
-## 📋 命令详解
+## 命令详解
 
 ### 1. 文件比较 (`file`)
 
@@ -41,14 +41,14 @@ node dist/cli.js file current.js suggested.js -f json -o result.json
 
 **示例输出（文本格式）**：
 ```
-📊 Diff Results:
+Diff Results:
 ──────────────────────────────────────────────────
 
-📋 Equal blocks:
+Equal blocks:
   Block 1: Lines 1-5
     5 lines
 
-✅ Added blocks:
+Added blocks:
   Block 1: Insert after line 4
     + function farewell(name) {
     +   console.log("Goodbye, " + name);
@@ -56,7 +56,7 @@ node dist/cli.js file current.js suggested.js -f json -o result.json
   Block 2: Insert after line 5
     + farewell("World");
 
-📈 Summary: 1 equal, 0 removed, 2 added
+Summary: 1 equal, 0 removed, 2 added
 ```
 
 ### 2. 文本比较 (`text`)
@@ -71,7 +71,7 @@ node dist/cli.js text -c "console.log('Hello');" -s "console.log('Hello');\ncons
 node dist/cli.js text -c "hello" -s "hello world" -f json
 ```
 
-## 🎯 使用场景
+## 使用场景
 
 ### 场景1：AI 代码补全比较
 
@@ -94,14 +94,14 @@ node dist/cli.js file before_refactor.js after_refactor.js -f json
 node dist/cli.js text -c "原始代码" -s "修改后代码"
 ```
 
-## 📊 输出格式
+## 输出格式
 
 ### 文本格式 (默认)
 
-- 🟢 **Equal blocks**: 相同的代码块
-- 🔴 **Removed blocks**: 被删除的代码块
-- 🟢 **Added blocks**: 新增的代码块
-- 📈 **Summary**: 统计摘要
+- **Equal blocks**: 相同的代码块
+- **Removed blocks**: 被删除的代码块
+- **Added blocks**: 新增的代码块
+- **Summary**: 统计摘要
 
 ### JSON 格式
 
@@ -125,7 +125,7 @@ node dist/cli.js text -c "原始代码" -s "修改后代码"
 }
 ```
 
-## 🧪 测试
+## 测试
 
 ```bash
 # 运行 CLI 测试
@@ -135,7 +135,7 @@ pnpm test:cli
 pnpm test:acceptance
 ```
 
-## 🛠️ 开发模式
+## 开发模式
 
 ```bash
 # 使用源码直接运行（开发时）
@@ -143,7 +143,7 @@ pnpm exec tsx src/cli.ts --help
 pnpm exec tsx src/cli.ts file test-files/current.js test-files/suggested.js
 ```
 
-## 📝 示例文件
+## 示例文件
 
 项目中包含了测试文件供参考：
 
@@ -155,13 +155,13 @@ pnpm exec tsx src/cli.ts file test-files/current.js test-files/suggested.js
 node dist/cli.js file test-files/current.js test-files/suggested.js
 ```
 
-## ⚡ 性能指标
+## 性能指标
 
 - ✅ **执行速度**: < 100ms（大部分场景）
 - ✅ **准确率**: 100%（通过 15 个验收测试用例）
 - ✅ **稳定性**: 高（包含错误处理和边界情况）
 
-## 🔧 故障排除
+## 故障排除
 
 ### 常见问题
 
@@ -192,7 +192,7 @@ node dist/cli.js file test-files/current.js test-files/suggested.js
 DEBUG=1 node dist/cli.js file current.js suggested.js
 ```
 
-## 📞 支持
+## 支持
 
 如遇问题，请查看：
 - 📄 验收测试报告：`acceptance-test-report.md`
